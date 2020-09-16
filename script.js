@@ -3,7 +3,7 @@ const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 const box = 32
 const snake = []
-const direction = 'right'
+let direction = 'right'
 
 // Initial coordinates
 snake[0] = {
@@ -42,6 +42,15 @@ const moveSnake = () => {
 
   snake.unshift(newHead)
 }
+
+const updatePosition = (event) => {
+  if (event.key === 'ArrowRight' && direction !== 'left') direction = 'right'
+  if (event.key === 'ArrowLeft' && direction !== 'right') direction = 'left'
+  if (event.key === 'ArrowUp' && direction !== 'down') direction = 'up'
+  if (event.key === 'ArrowDown' && direction !== 'up') direction = 'down'
+}
+
+document.addEventListener('keydown', updatePosition)
 
 const startGame = () => {
   createBackground()
