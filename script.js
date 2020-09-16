@@ -3,7 +3,13 @@ const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 const box = 32
 const snake = []
+
+// Initial direction
 let direction = 'right'
+const food = {
+  x: Math.floor(Math.random() * 15 + 1) * box,
+  y: Math.floor(Math.random() * 15 + 1) * box
+}
 
 // Initial coordinates
 snake[0] = {
@@ -22,6 +28,11 @@ const createSnake = () => {
     context.fillStyle = 'green'
     context.fillRect(snake.x, snake.y, box, box)
   })
+}
+
+const createFood = () => {
+  context.fillStyle = 'red'
+  context.fillRect(food.x, food.y, box, box)
 }
 
 const moveSnake = () => {
@@ -64,6 +75,7 @@ document.addEventListener('keydown', updatePosition)
 const startGame = () => {
   createBackground()
   createSnake()
+  createFood()
   moveSnake()
 }
 
