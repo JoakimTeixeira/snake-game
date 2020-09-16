@@ -3,6 +3,7 @@ const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 const box = 32
 const snake = []
+const direction = 'right'
 
 // Initial coordinates
 snake[0] = {
@@ -23,5 +24,29 @@ const createSnake = () => {
   })
 }
 
-createBackground()
-createSnake()
+const moveSnake = () => {
+  let snakeX = snake[0].x
+  let snakeY = snake[0].y
+
+  if (direction === 'right') snakeX += box
+  if (direction === 'left') snakeX -= box
+  if (direction === 'up') snakeY -= box
+  if (direction === 'down') snakeY += box
+
+  snake.pop()
+
+  const newHead = {
+    x: snakeX,
+    y: snakeY
+  }
+
+  snake.unshift(newHead)
+}
+
+const startGame = () => {
+  createBackground()
+  createSnake()
+  moveSnake()
+}
+
+setInterval(startGame, 100)
