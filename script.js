@@ -25,6 +25,8 @@ const createSnake = () => {
 }
 
 const moveSnake = () => {
+  handleCollision()
+
   let snakeX = snake[0].x
   let snakeY = snake[0].y
 
@@ -41,6 +43,13 @@ const moveSnake = () => {
   }
 
   snake.unshift(newHead)
+}
+
+const handleCollision = () => {
+  if (snake[0].x > 15 * box && direction === 'right') snake[0].x = -box
+  if (snake[0].x < 0 * box && direction === 'left') snake[0].x = 16 * box
+  if (snake[0].y < 0 * box && direction === 'up') snake[0].y = 16 * box
+  if (snake[0].y > 15 * box && direction === 'down') snake[0].y = -box
 }
 
 const updatePosition = (event) => {
