@@ -18,20 +18,20 @@ snake[0] = {
   y: 8 * box
 }
 
-const createBackground = () => {
+const drawBackground = () => {
   context.fillStyle = 'lightgreen'
   // fillRect(x, y, width, height)
   context.fillRect(0, 0, 16 * box, 16 * box)
 }
 
-const createSnake = () => {
+const drawSnake = () => {
   snake.map((snake) => {
     context.fillStyle = 'green'
     context.fillRect(snake.x, snake.y, box, box)
   })
 }
 
-const createFood = () => {
+const drawFood = () => {
   context.fillStyle = 'red'
   context.fillRect(food.x, food.y, box, box)
 }
@@ -72,11 +72,27 @@ const handleWallCollision = () => {
   if (snake[0].y > 15 * box && direction === 'down') snake[0].y = -box
 }
 
+const generateRandomFood = () => {
+  const food = {
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box
+  }
+
+  return food
+}
+
 const handleFoodCollision = (snakeX, snakeY) => {
   if (snakeX !== food.x || snakeY !== food.y) snake.pop()
   else {
-    food.x = Math.floor(Math.random() * 15 + 1) * box
-    food.y = Math.floor(Math.random() * 15 + 1) * box
+    let foodCoordinate = generateRandomFood()
+    snake.map((snake) => {
+      if (foodCoordinate.x === snake.x && foodCoordinate.y === snake.y) {
+        foodCoordinate = generateRandomFood()
+      }
+    })
+
+    food.x = foodCoordinate.x
+    food.y = foodCoordinate.y
     score += 1
 
     const points = document.getElementById('points')
@@ -95,9 +111,9 @@ const handleSnakeCollision = () => {
 }
 
 const startGame = () => {
-  createBackground()
-  createSnake()
-  createFood()
+  drawBackground()
+  drawSnake()
+  drawFood()
   moveSnake()
 }
 
