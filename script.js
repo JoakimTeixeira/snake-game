@@ -36,7 +36,7 @@ const createFood = () => {
 }
 
 const moveSnake = () => {
-  handleCollision()
+  handleWallCollision()
 
   let snakeX = snake[0].x
   let snakeY = snake[0].y
@@ -46,7 +46,7 @@ const moveSnake = () => {
   if (direction === 'up') snakeY -= box
   if (direction === 'down') snakeY += box
 
-  snake.pop()
+  handleFoodCollision(snakeX, snakeY)
 
   const newHead = {
     x: snakeX,
@@ -56,11 +56,19 @@ const moveSnake = () => {
   snake.unshift(newHead)
 }
 
-const handleCollision = () => {
+const handleWallCollision = () => {
   if (snake[0].x > 15 * box && direction === 'right') snake[0].x = -box
   if (snake[0].x < 0 * box && direction === 'left') snake[0].x = 16 * box
   if (snake[0].y < 0 * box && direction === 'up') snake[0].y = 16 * box
   if (snake[0].y > 15 * box && direction === 'down') snake[0].y = -box
+}
+
+const handleFoodCollision = (snakeX, snakeY) => {
+  if (snakeX !== food.x || snakeY !== food.y) snake.pop()
+  else {
+    food.x = Math.floor(Math.random() * 15 + 1) * box
+    food.y = Math.floor(Math.random() * 15 + 1) * box
+  }
 }
 
 const updatePosition = (event) => {
