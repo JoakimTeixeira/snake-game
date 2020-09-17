@@ -37,6 +37,7 @@ const createFood = () => {
 
 const moveSnake = () => {
   handleWallCollision()
+  handleSnakeCollision()
 
   let snakeX = snake[0].x
   let snakeY = snake[0].y
@@ -56,6 +57,13 @@ const moveSnake = () => {
   snake.unshift(newHead)
 }
 
+const updateSnakePosition = (event) => {
+  if (event.key === 'ArrowRight' && direction !== 'left') direction = 'right'
+  if (event.key === 'ArrowLeft' && direction !== 'right') direction = 'left'
+  if (event.key === 'ArrowUp' && direction !== 'down') direction = 'up'
+  if (event.key === 'ArrowDown' && direction !== 'up') direction = 'down'
+}
+
 const handleWallCollision = () => {
   if (snake[0].x > 15 * box && direction === 'right') snake[0].x = -box
   if (snake[0].x < 0 * box && direction === 'left') snake[0].x = 16 * box
@@ -71,14 +79,15 @@ const handleFoodCollision = (snakeX, snakeY) => {
   }
 }
 
-const updatePosition = (event) => {
-  if (event.key === 'ArrowRight' && direction !== 'left') direction = 'right'
-  if (event.key === 'ArrowLeft' && direction !== 'right') direction = 'left'
-  if (event.key === 'ArrowUp' && direction !== 'down') direction = 'up'
-  if (event.key === 'ArrowDown' && direction !== 'up') direction = 'down'
+const handleSnakeCollision = () => {
+  for (let i = 1; i < snake.length; i++) {
+    if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
+      clearInterval(game)
+      alert('Game Over!')
+      window.location.reload()
+    }
+  }
 }
-
-document.addEventListener('keydown', updatePosition)
 
 const startGame = () => {
   createBackground()
@@ -87,4 +96,6 @@ const startGame = () => {
   moveSnake()
 }
 
-setInterval(startGame, 100)
+const game = setInterval(startGame, 100)
+
+document.addEventListener('keydown', updateSnakePosition)
