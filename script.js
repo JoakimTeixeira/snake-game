@@ -59,10 +59,12 @@ const moveSnake = () => {
 }
 
 const updateSnakePosition = (event) => {
-  if (event.key === 'ArrowRight' && direction !== 'left') direction = 'right'
-  if (event.key === 'ArrowLeft' && direction !== 'right') direction = 'left'
-  if (event.key === 'ArrowUp' && direction !== 'down') direction = 'up'
-  if (event.key === 'ArrowDown' && direction !== 'up') direction = 'down'
+  if (snake[0].x !== -box && snake[0].x !== 16 * box && snake[0].y !== -box && snake[0].y !== 16 * box) {
+    if (event.key === 'ArrowRight' && direction !== 'left') direction = 'right'
+    if (event.key === 'ArrowLeft' && direction !== 'right') direction = 'left'
+    if (event.key === 'ArrowUp' && direction !== 'down') direction = 'up'
+    if (event.key === 'ArrowDown' && direction !== 'up') direction = 'down'
+  }
 }
 
 const handleWallCollision = () => {
