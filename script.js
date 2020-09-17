@@ -3,6 +3,7 @@ const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 const box = 32
 const snake = []
+let score = 0
 
 // Initial direction
 let direction = 'right'
@@ -76,6 +77,10 @@ const handleFoodCollision = (snakeX, snakeY) => {
   else {
     food.x = Math.floor(Math.random() * 15 + 1) * box
     food.y = Math.floor(Math.random() * 15 + 1) * box
+    score += 1
+
+    const points = document.getElementById('points')
+    points.innerHTML = `Points: ${score}`
   }
 }
 
