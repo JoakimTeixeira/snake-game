@@ -95,10 +95,8 @@ const handleFoodCollision = (snakeX, snakeY) => {
 
     food.x = foodCoordinate.x
     food.y = foodCoordinate.y
-    score += 1
 
-    const points = document.getElementById('points')
-    points.innerHTML = `Points: ${score}`
+    updateScore()
   }
 }
 
@@ -110,6 +108,13 @@ const handleSnakeCollision = () => {
       window.location.reload()
     }
   }
+}
+
+const updateScore = () => {
+  score += 1
+
+  const points = document.getElementById('points')
+  points.innerHTML = `Points: ${score}`
 }
 
 const startGame = () => {
