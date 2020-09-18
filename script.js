@@ -48,14 +48,14 @@ const moveSnake = () => {
   if (direction === 'up') snakeY -= box
   if (direction === 'down') snakeY += box
 
-  handleFoodCollision(snakeX, snakeY)
-
   const newHead = {
     x: snakeX,
     y: snakeY
   }
 
   snake.unshift(newHead)
+
+  handleFoodCollision(snakeX, snakeY)
 }
 
 const updateSnakePosition = (event) => {
@@ -97,6 +97,7 @@ const handleFoodCollision = (snakeX, snakeY) => {
     food.y = foodCoordinate.y
 
     updateScore()
+    verifyScore()
   }
 }
 
@@ -115,6 +116,13 @@ const updateScore = () => {
 
   const points = document.getElementById('points')
   points.innerHTML = `Points: ${score}`
+}
+
+const verifyScore = () => {
+  if (score === 256) {
+    alert('You won the game!')
+    window.location.reload()
+  }
 }
 
 const startGame = () => {
