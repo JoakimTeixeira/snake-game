@@ -17,6 +17,6 @@
 	},
 	"homepage": "https://github.com/JoakimTeixeira/snake-game#readme",
 	"devDependencies": {
-		"standard": "^14.3.4"
+		"standard": "^16.0.4"
 	}
 }
