@@ -1,4 +1,5 @@
 # Snake Game
+
 Classic snake game made on canvas.
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
@@ -7,15 +8,18 @@ Classic snake game made on canvas.
 
 ## To-do
 
+- [ ] Convert code to Typescript
+- [ ] Modularize logic into different files
 - [ ] Implement mobile responsiveness
 - [ ] Update fonts
 - [ ] Create more levels
-- [ ] Add multiplayer mode 
+- [ ] Integrate music
+- [ ] Add multiplayer mode
 
 ## Running the Project
 
 To get started, fork the repository and then run the following command:
 
     npm install
-    
-After that, open the ```index.html``` file in the browser.
+
+After that, open the `index.html` file in the browser.
