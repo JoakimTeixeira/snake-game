@@ -18,7 +18,7 @@ Classic snake game made on canvas.
 
 ## Running the Project
 
-To get started, fork the repository and then run the following command:
+To get started, fork the repository, clone it, and then run the following command:
 
     npm install
 
